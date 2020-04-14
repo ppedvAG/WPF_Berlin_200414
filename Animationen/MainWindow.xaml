@@ -1,0 +1,65 @@
+﻿<Window x:Class="Animationen.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Animationen"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="438.548" Width="286.299">
+    <Canvas x:Name="CvsMain" Background="LightYellow">
+        <TextBlock Text="Möchten Sie mehr Gehalt haben?" Canvas.Left="50"/>
+        <Button Content="Ja, klar!"
+                Canvas.Left="25"
+                Canvas.Top="50"
+                x:Name="BtnJa">
+
+            <Button.Triggers>
+
+                <!--Animationen sind Property-Veränderungen über Zeit, welche durch einen EventTrigger ausgelöst
+                        werden. Die Property-Veränderungen werden in einem Storyboard definiert.
+                        Die Berechnung der Animationen erfolg in einem Side-Thread, wodurch die GUI die ganze Zeit über 
+                        benutzbar bleibt.-->
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="BtnJa"
+                                             Storyboard.TargetProperty="(Canvas.Top)"
+                                             To="500"
+                                             Duration="0:0:1"
+                                             AutoReverse="True"/>
+
+                            <DoubleAnimation Storyboard.TargetName="BtnJa"
+                                             Storyboard.TargetProperty="(Canvas.Left)"
+                                             To="500"
+                                             Duration="0:0:1"
+                                             AutoReverse="True"/>
+                           
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                
+            </Button.Triggers>
+            
+        </Button>
+        <Button Content="Nein, nicht nötig"
+                Canvas.Left="175"
+                Canvas.Top="50">
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="PreviewMouseDown">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                            Storyboard.TargetName="CvsMain"
+                                            From="LightYellow"
+                                            To="DeepPink"
+                                            AutoReverse="True"
+                                            Duration="0:0:5"/>
+                        </Storyboard>
+                    </BeginStoryboard> 
+                </EventTrigger>
+            </Button.Triggers>
+        </Button>
+
+
+    </Canvas>
+</Window>

@@ -20,14 +20,16 @@
                 kann die Position der Elemenete im Canvas definiert werden-->
                 <Rectangle Fill="Blue" Height="50" Width="50"
                        Canvas.Left="50"
-                       Canvas.Top="50"/>
+                       Canvas.Top="50"
+                           x:Name="RctBlue"/>
                 <Ellipse Fill="Green" Height="50" Width="50"
                      Canvas.Left="60"
                      Canvas.Top="60"
                      Panel.ZIndex="-1"/>
                 <Button Content="Click"
                     Canvas.Left="20"
-                    Canvas.Top="20"/>
+                    Canvas.Top="20"
+                        Click="Button_Click"/>
             </Canvas>
 
             <!--StackPanels 'stapeln' die beinhaltenden Elemente je nach Orientierung, wobei sie in dieser Richtung den Elementen eine minimale
@@ -121,7 +123,7 @@
             <Viewbox>
                 <Button Content="Moin"/>
             </Viewbox>
-            
+
         </StackPanel>
     </ScrollViewer>
 </Window>
