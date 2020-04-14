@@ -8,6 +8,8 @@
         Title="MainWindow" Height="781.034" Width="489.984"
         x:Name="WndMain">
     <StackPanel>
+        <!--Labels besitzen, wie die meisten Controls und alle Container eine Content-Eigenschaft, welche
+        mit weiteren Containern/Controls befüllt werden können (Auch hier darf nur ein Root-Element vohanden sein).-->
         <Label Content="Hallo"
                Foreground="Red"
                FontSize="20"
@@ -15,6 +17,8 @@
                BorderBrush="Black"
                HorizontalContentAlignment="Right"/>
 
+        <!--TextBlöcke sind Labels, welche auf Strings spezialisiert sind. Sie besitzen statt der
+            Content- die Text-Property-->
         <TextBlock Text="Auch hallo Auch hallo Auch hallo Auch hallo"
                    FontFamily="Arial"
                    TextWrapping="Wrap"
@@ -41,6 +45,8 @@
             </TextBox.ContextMenu>
         </TextBox>
 
+        <!--ItemControls wie ComboBoxen oder ListViews können über die ItemsSource-Property mit Daten 
+        oder in XAML mit Items mit Content-Property bestückt werden-->
         <ComboBox>
             <ComboBoxItem Content="Eintrag1"/>
             <ComboBoxItem Content="Eintrag2"/>
@@ -51,6 +57,7 @@
                   IsThreeState="True"
                   IsChecked="{x:Null}"/>
 
+        <!--RadioButtons können einer Group zugeordnet werden, wodurch nur einer der Buttons angewählt sein darf-->
         <RadioButton Content="Auswahl1" GroupName="group1"/>
         <RadioButton Content="Auswahl2" GroupName="group1"/>
 
