@@ -1,0 +1,91 @@
+﻿<Window x:Class="Controls.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Controls"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="781.034" Width="489.984"
+        x:Name="WndMain">
+    <StackPanel>
+        <Label Content="Hallo"
+               Foreground="Red"
+               FontSize="20"
+               BorderThickness="2"
+               BorderBrush="Black"
+               HorizontalContentAlignment="Right"/>
+
+        <TextBlock Text="Auch hallo Auch hallo Auch hallo Auch hallo"
+                   FontFamily="Arial"
+                   TextWrapping="Wrap"
+                   x:Name="TblOutput"/>
+
+        <Button Content="Hallo"
+                Click="Button_Click"
+                Background="Blue"/>
+
+        <Image Source="C:\Users\kh2\Documents\ArbeitArbeit\Kurse\WPF\Material\ppedv.bmp"
+               Stretch="Fill"
+               Height="100"/>
+
+        <TextBox Text="Ich bin ein String"
+                 Height="50"
+                 AcceptsReturn="True"
+                 AcceptsTab="True"
+                 TextWrapping="Wrap"
+                 VerticalScrollBarVisibility="Auto">
+            <TextBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Kopieren"/>
+                </ContextMenu>
+            </TextBox.ContextMenu>
+        </TextBox>
+
+        <ComboBox>
+            <ComboBoxItem Content="Eintrag1"/>
+            <ComboBoxItem Content="Eintrag2"/>
+        </ComboBox>
+            
+
+        <CheckBox Content="Hak mich ab"
+                  IsThreeState="True"
+                  IsChecked="{x:Null}"/>
+
+        <RadioButton Content="Auswahl1" GroupName="group1"/>
+        <RadioButton Content="Auswahl2" GroupName="group1"/>
+
+        <Slider Minimum="0" Maximum="10" Value="5"
+                TickFrequency="1"
+                TickPlacement="None"
+                IsSnapToTickEnabled="True"/>
+
+        <ProgressBar Height="20" Value="5"
+                     Minimum="0"
+                     Maximum="100"
+                     IsIndeterminate="True"/>
+
+        <Menu>
+            <MenuItem Header="Datei">
+                <MenuItem Header="Speichern">
+                    <MenuItem Header="Speichern Unter"/>
+                </MenuItem>
+                <MenuItem Header="Beenden"
+                          Click="MenuItem_Click"/>
+                <TextBox Width="50"/>
+            </MenuItem>
+        </Menu>
+
+        <Ribbon>
+            <Ribbon.ApplicationMenu>
+                <RibbonApplicationMenu>
+                    <RibbonApplicationMenuItem Header="Speichern"/>
+                </RibbonApplicationMenu>
+            </Ribbon.ApplicationMenu>
+            <RibbonTab Header="Datei">
+                <RibbonGroup Header="Kopieren und Co">
+                    <RibbonButton Content="Kopieren" Height="50" Width="50" />
+                </RibbonGroup>
+            </RibbonTab>
+        </Ribbon>
+    </StackPanel>
+</Window>
