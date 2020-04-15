@@ -1,0 +1,39 @@
+﻿<Window x:Class="Styles.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Styles"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <!--Mit Styles konnen Sammlungen Propertes einzelner Controls und Container
+        gebündelt vordefiniert werden. Erhält ein Style einen Key, erhalten alle derartigen
+        Elemente, welche den Style in ihrer Style-Property angeben, diesen Style. Wenn ein Style
+        keinen Key hat, wird er zum Standartlayout derartiger Elemente in der gewählten
+        Range. Lokale Property-Werte haben Vorang vor den Styles.-->
+    <Window.Resources>
+
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Aqua"/>
+            <Setter Property="FontSize" Value="30"/>
+        </Style>
+
+        <Style TargetType="Button" x:Key="StyBtnMain">
+            <Setter Property="Background" Value="LightGreen"/>
+            <Setter Property="FontSize" Value="30"/>
+        </Style>
+
+        <!--Mittels der BaseOn-Property kann ein Style alles Propeties eines anderen Styles erben.-->
+        <Style TargetType="Button" x:Key="StyBtnMain2" BasedOn="{StaticResource StyBtnMain}">
+            <Setter Property="FontFamily" Value="Arial"/>
+        </Style>
+
+    </Window.Resources>
+    
+    <StackPanel>
+        <Button Content="BTN1" FontSize="20"/>
+        <Button Content="BTN2" Style="{StaticResource StyBtnMain}"/>
+        <Button Content="BTN3" Style="{StaticResource StyBtnMain2}"/>
+    </StackPanel>
+</Window>

@@ -1,0 +1,45 @@
+﻿<Window x:Class="Resources.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Resources"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:p="clr-namespace:Resources.Properties"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="247.774" Width="447.695">
+
+    <!--Über die Ressourcen von App/Window/Container können für die entsprechende Range Daten
+        zur Verfügung gestellt werden. Die Verbindung von Properties zu diesen Resourcen wird dann
+        über eine StaticResource-Bindung hergestellt. Alternativ kann eine DynamicRessource-Bindung 
+        erstellt werden, wodurch die gebundene Property auf Veränderungen an der Ressource durch 
+        den CodeBehind reagiert.-->
+    <Window.Resources>
+        <ResourceDictionary>
+            <!--Die Einbindung von mehreren ResourceDictionaries erfolgt über die Property MergedDictionaries-->
+            <ResourceDictionary.MergedDictionaries>
+                <!--ResourceDictionaries sind XAML-Dateien, welche nur Ressourcen beinhalten-->
+                <ResourceDictionary Source="Dictionary1.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    <StackPanel x:Name="SplMain">
+        
+        <StackPanel.Resources>
+            <sys:Double x:Key="FontSize">25.0</sys:Double>
+        </StackPanel.Resources>
+
+        <!--Eine Anbindung an Ressourcen erfolgt entweder über eine StaticResource-Bindung, welche den Wert einmalig einholt-->
+        <!--oder über eine DynamicResource-Bindung, welche permanent nach Veränderungen sucht und diese übernimmt-->
+        <Button Content="{StaticResource stringAusDict}" 
+                FontSize="{StaticResource FontSize}"
+                Background="{StaticResource gobalButtonBackColor}"/>
+
+        <!--Die x:Static-Bindung ist ebenfalls eine statische Ressourcen-Bindung, welche mächtiger ist, als die 'Normale'.
+        Sie kann zum Beispiel (wie hier) für Bindungen an eine resX-Datei (in den Projekt-Properties) benutzt werden.-->
+        <Button Content="{x:Static p:Resources.meinString}"
+                FontSize="{DynamicResource FontSize}"
+                Click="Button_Click"/>
+    </StackPanel>
+</Window>
