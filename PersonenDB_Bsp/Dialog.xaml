@@ -19,6 +19,22 @@
                             ObjectInstance="{x:Type Colors}"
                             MethodName="GetProperties"/>
         <local:EnumToBoolConverter x:Key="enum2bool"/>
+
+        <ControlTemplate x:Key="CtpError">
+            <StackPanel Orientation="Horizontal">
+                <Border BorderBrush="Red" BorderThickness="1" x:Name="BdrAep">
+                    <AdornedElementPlaceholder x:Name="Aep"/>
+                </Border>
+                <TextBlock Text="!" Foreground="Red" FontSize="{StaticResource doubleFontSize}"
+                           Margin="3,0" FontWeight="Bold" VerticalAlignment="Center"/>
+                <Popup AllowsTransparency="True" PopupAnimation="Fade"
+                       PlacementTarget="{Binding ElementName=BdrAep}" Placement="Bottom"
+                       IsOpen="{Binding ElementName=Aep, Path=AdornedElement.IsMouseOver, Mode=OneWay}">
+                    <TextBlock Text="{Binding ElementName=Aep, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"
+                               Foreground="White" Background="Red" Padding="2" FontSize="{StaticResource doubleFontSize}"/>
+                </Popup>
+            </StackPanel>
+        </ControlTemplate>
     </Window.Resources>
 
     <Grid Margin="10">
@@ -51,15 +67,18 @@
 
         <TextBox x:Name="TbxVorname"
                  Grid.Column="1"
-                 Text="{Binding Vorname}"/>
+                 Text="{Binding Vorname, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                 Validation.ErrorTemplate="{StaticResource CtpError}"/>
         
         <TextBox x:Name="TbxNachname"
                  Grid.Column="1" Grid.Row="1"
-                 Text="{Binding Nachname}"/>
+                 Text="{Binding Nachname, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                 Validation.ErrorTemplate="{StaticResource CtpError}"/>
         
         <DatePicker x:Name="DprGeburtsdatum"
                     Grid.Column="1" Grid.Row="2"
-                    SelectedDate="{Binding Geburtsdatum}"/>
+                    SelectedDate="{Binding Geburtsdatum, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                    Validation.ErrorTemplate="{StaticResource CtpError}"/>
         
         <CheckBox x:Name="ChbVerheiratet"
                   Grid.Column="1" Grid.Row="3"
@@ -67,7 +86,8 @@
         
         <ComboBox x:Name="CbbLieblingsfarbe"
                   Grid.Column="1" Grid.Row="4"
-                  SelectedValue="{Binding Lieblingsfarbe}"
+                  SelectedValue="{Binding Lieblingsfarbe, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                  Validation.ErrorTemplate="{StaticResource CtpError}"
                   SelectedValuePath="Name"
                   ItemsSource="{Binding Source={StaticResource OdpColorsProperties}}">
             <ComboBox.ItemTemplate>
@@ -99,7 +119,25 @@
                    HorizontalAlignment="Right" Margin="0,5">
             <Button x:Name="BtnOk"
                     Content="OK"
-                    Click="BtnOk_Click"/>
+                    Click="BtnOk_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="IsEnabled" Value="False"/>
+                        <Setter Property="Width" Value="120"/>
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding ElementName=TbxVorname, Path=(Validation.HasError)}" Value="False"/>
+                                    <Condition Binding="{Binding ElementName=TbxNachname, Path=(Validation.HasError)}" Value="False"/>
+                                    <Condition Binding="{Binding ElementName=DprGeburtsdatum, Path=(Validation.HasError)}" Value="False"/>
+                                    <Condition Binding="{Binding ElementName=CbbLieblingsfarbe, Path=(Validation.HasError)}" Value="False"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="IsEnabled" Value="True"/>
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
             <Button x:Name="BtnAbbruch"
                     Content="Abbrechen"
                     Click="BtnAbbruch_Click"/>

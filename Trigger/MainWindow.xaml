@@ -1,0 +1,37 @@
+﻿<Window x:Class="Trigger.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Trigger"
+        xmlns:uc="clr-namespace:MyUserControll;assembly=MyUserControll"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="370.133" Width="395.341">
+    <StackPanel Background="{Binding ElementName=CpTest, Path=PickedColor}">
+        <Button Content="Ändere BoolWert"
+                Click="Button_Click"/>
+        <TextBlock>
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Text" Value="Die BoolVariable steht auf True"/>
+                    <Setter Property="Foreground" Value="Green"/>
+                    <Style.Triggers>
+                        <!--Mittels Trigger kann das Verhalten/Aussehen von Objekten unter bestimmten Umständen geändert werden-->
+                        <!--Der DataTrigger reagiert auf eine Veränderung einer WPF- oder .NET-Property>-->
+                        <DataTrigger Value="False" Binding="{Binding Path=BoolVal}">
+                            <Setter Property="Text" Value="Die BoolVariable staht auf False"/>
+                            <Setter Property="Foreground" Value="Red"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+          <!--Andere Triggerarten sind
+        EventTrigger: Dieser reagiert auf eine geworfenes RoutedEvent (vgl. Modul 14)
+        PropertyTrigger: Dieser reagiert auf eine veränderte WPF-Property (nicht bei .NET-Properties anwendbar-->
+        </TextBlock>
+        
+        <Separator Margin="10"/>
+        <!--Einbindung des UserControls aus Modul 12-->
+        <uc:ColorPicker x:Name="CpTest"/>
+    </StackPanel>
+</Window>

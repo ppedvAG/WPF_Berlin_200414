@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="MyUserControll.ColorPicker"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyUserControll"
+             mc:Ignorable="d" Height="165.142" Width="316.289">
+    <!--UserControls werden verwendet um eigene Control-Elemente zu erstellen und zu versiegeln, so dass der Benutzer die Properties
+    der Teilelemente nicht mehr direkt verwendet kann.-->
+    <UserControl.Resources>
+        <local:DoublesToBrushConverter x:Key="doubles2Brush"/>
+    </UserControl.Resources>
+    <StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="R:" Width="15"/>
+            <Slider Minimum="0" Maximum="255"
+                    Width="250"
+                    IsSnapToTickEnabled="True"
+                    x:Name="SdrRed"
+                    Value="0"/>
+            <TextBox Text="{Binding ElementName=sdrRed, Path=Value}" Width="50"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="G:" Width="15"/>
+            <Slider Minimum="0" Maximum="255"
+                    Width="250"
+                    IsSnapToTickEnabled="True"
+                x:Name="SdrGreen"
+                Value="0"/>
+            <TextBox Text="{Binding ElementName=sdrGreen, Path=Value}" Width="50"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="B:" Width="15"/>
+            <Slider Minimum="0" Maximum="255"
+                    Width="250"
+                    IsSnapToTickEnabled="True"
+                x:Name="SdrBlue"
+                Value="0"/>
+            <TextBox Text="{Binding ElementName=sdrBlue, Path=Value}" Width="50"/>
+        </StackPanel>
+        <Border BorderBrush="Black" BorderThickness="1" Width="100">
+            <Rectangle Width="100" Height="100" x:Name="RctOutput">
+                <Rectangle.Fill>
+                   <MultiBinding Converter="{StaticResource doubles2Brush}">
+                        <Binding ElementName="SdrRed" Path="Value"/>
+                        <Binding ElementName="SdrGreen" Path="Value"/>
+                        <Binding ElementName="SdrBlue" Path="Value"/>
+                    </MultiBinding>
+                </Rectangle.Fill>
+            </Rectangle>
+        </Border>
+    </StackPanel>
+</UserControl>
