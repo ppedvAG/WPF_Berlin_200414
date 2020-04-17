@@ -94,5 +94,14 @@
                 </RibbonGroup>
             </RibbonTab>
         </Ribbon>
+
+        <TabControl>
+            <TabItem Header="Eins">
+                <Button Content="Hallo"/>
+            </TabItem>
+            <TabItem Header="Zwei" IsEnabled="False">
+                
+            </TabItem>
+        </TabControl>
     </StackPanel>
 </Window>
